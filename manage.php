@@ -87,5 +87,6 @@
 	//close DB
 	$dbh = null;
 	?>
+        <a href="index.html">Return to main page</a>
     </body>
 </html>

@@ -17,17 +17,17 @@ include ("dbConnect.php")
 foreach ($dbh->query($sql) as $row)
 {
 ?>
-    <div id="artists">
+    <table>
         <?php
-        echo "  <a href='facebook.com'><p>$row[name]<br>
-                <img src='$row[image]'><br>
-                $row[contact]</p></a>
-                <input type='hidden' id='id' value='$row[id]'>";
+        $index = $row[id];
+        echo "  <tr><td><a href='dispArtist.php?i=$index'>$row[name]</a></td>
+                <td><img src='$row[image]'></td>
+                <td>$row[contact]</td></tr>";
         ?>
-    </div>
+    </table>
 <?php
 }
 ?>
-
+<a href="index.html">Return to main page</a>
 </body>
 </html>
