@@ -1,11 +1,6 @@
 <?php
 include("dbConnect.php");
 $debugOn = true;
-
-if ($_REQUEST['submit'] == "Delete Entry") {
-	$sql = "DELETE FROM artists WHERE id = '$_REQUEST[id]'";
-	if ($dbh->exec($sql)) header("Location: manage.php");
-}
 ?>
 
 <!doctype html>
@@ -23,15 +18,20 @@ if ($_REQUEST['submit'] == "Delete Entry") {
 	echo "<pre>";
 	print_r($_REQUEST);
 	echo "</pre>";
-	
-	if ($_REQUEST['submit'] == "Insert Entry") {
+
+    if ($_REQUEST['submit'] == "Delete") {
+        $sql = "DELETE FROM artists WHERE id = '$_REQUEST[id]'";
+        if ($dbh->exec($sql)) header("Location: manage.php");
+    }
+
+	if ($_REQUEST['submit'] == "Insert") {
 		$sql = "INSERT INTO artists (name, phone, content, contact, image, web, email) VALUES ('$_REQUEST[name]', '$_REQUEST[phone]', '$_REQUEST[content]','$_REQUEST[contact]','$_REQUEST[image]','$_REQUEST[web]','$_REQUEST[email]')";
 		echo "<p>Query:" . $sql . "</p>\n<p><strong>";
 		if ($dbh->exec($sql))
 			echo "Inserted $_REQUEST[name]";
 		else
 			echo "Not Inserted";
-        } else if ($_REQUEST['submit'] == "Update Entry") {
+        } else if ($_REQUEST['submit'] == "Update") {
 		$sql = "UPDATE artists SET name = '$_REQUEST[name]', phone = '$_REQUEST[phone]', content = '$_REQUEST[content]', contact = '$_REQUEST[contact]', image = '$_REQUEST[image]', web = '$_REQUEST[web]', email = '$_REQUEST[email]' WHERE id = '$_REQUEST[id]'";
 		echo "<p>Query:" . $sql . "</p>\n<p><strong>";
 		if ($dbh->exec($sql))
