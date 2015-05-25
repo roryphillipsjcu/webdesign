@@ -14,20 +14,16 @@ error_reporting(E_ALL);
 if ($_REQUEST['submit'] == "Add") {
 
     //Building and escaping an SQL query to add this artist to the database
-    $sql = sprintf("INSERT INTO artists (artist_name, artist_phone, artist_content, artist_contact, artist_image, artist_website, artist_email, posterID)
-                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '$_SESSION[userID]')",
+    $sql = sprintf("INSERT INTO notice (notice_name, notice_detail, notice_expiry, posterID)
+                    VALUES ('%s', '%s', '$_REQUEST[expiry]', '$_SESSION[userID]')",
         SQLite3::escapeString($_REQUEST[name]),
-        SQLite3::escapeString($_REQUEST[phone]),
-        SQLite3::escapeString($_REQUEST[content]),
-        SQLite3::escapeString($_REQUEST[contact]),
-        SQLite3::escapeString($_REQUEST[image]),
-        SQLite3::escapeString($_REQUEST[web]),
-        SQLite3::escapeString($_REQUEST[email])
-        );
+        SQLite3::escapeString($_REQUEST[detail])
+    );
 
     //See if the SQL will execute
     if ($dbh->exec($sql)){
-        header("Location: userCP.php");
+        header("Location: noticeAdd.php");
+        $_SESSION['log'] = "Successfully added $_REQUEST[name] to the database";
     } else {
         $_SESSION['user_debug'] = "SQL Command was not sucessfully executed";
         $_SESSION['sql'] = $sql;
@@ -37,20 +33,14 @@ if ($_REQUEST['submit'] == "Add") {
 } elseif ($_REQUEST['submit'] == "Update") {
 
     //Building and escaping an SQL query to update this artist to the database
-    $sql = sprintf("UPDATE artists SET artist_name = '%s', artist_phone = '%s', artist_content = '%s', artist_contact = '%s', artist_image = '%s', artist_website = '%s', artist_email = '%s'
-                    WHERE artist_id = '$_REQUEST[id]'",
+    $sql = sprintf("UPDATE notice SET notice_name = '%s', notice_detail = '%s', notice_expiry = '$_REQUEST[expiry]', posterID = '$_SESSION[userID]'",
         SQLite3::escapeString($_REQUEST[name]),
-        SQLite3::escapeString($_REQUEST[phone]),
-        SQLite3::escapeString($_REQUEST[content]),
-        SQLite3::escapeString($_REQUEST[contact]),
-        SQLite3::escapeString($_REQUEST[image]),
-        SQLite3::escapeString($_REQUEST[web]),
-        SQLite3::escapeString($_REQUEST[email])
+        SQLite3::escapeString($_REQUEST[detail])
     );
 
     //See if the SQL will execute
     if ($dbh->exec($sql)){
-        header("Location: artistEdit.php");
+        header("Location: noticeEdit.php");
         $_SESSION['log'] = "Successfully updated $_REQUEST[name] to the database";
     } else {
         $_SESSION['user_debug'] = "SQL Command was not sucessfully executed";
@@ -60,9 +50,9 @@ if ($_REQUEST['submit'] == "Add") {
 
 } elseif ($_REQUEST['submit'] == "Delete") {
 
-    $sql = "DELETE FROM artists WHERE artist_id = '$_REQUEST[id]'";
+    $sql = "DELETE FROM notice WHERE notice_id = '$_REQUEST[id]'";
     if ($dbh->exec($sql)) {
-        header("Location: artistEdit.php");
+        header("Location: noticeEdit.php");
         $_SESSION['log'] = "Successfully deleted $_REQUEST[name] from the database";
     } else {
         $_SESSION['user_debug'] = "SQL Command was not sucessfully executed";

@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rory
- * Date: 12-May-15
- * Time: 17:25
- */
+
+include('dbConnect.php');
 
 //Start the session
 session_start();
@@ -18,7 +14,7 @@ error_reporting(E_ALL);
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>TMC - Debug</title>
+    <title>TMC - ####</title>
     <link type="text/css" href="mainStyle.css" rel="stylesheet">
 </head>
 <body>
@@ -32,9 +28,9 @@ error_reporting(E_ALL);
     <div id="navBar">
         <ul>
             <li><a href="index.php" id="navButton">Home</a></li>
-            <li><a href="artists.php" id="navButton">Artists</a></li>
-            <li><a href="events.php" id="navButton">Events</a></li>
-            <li><a href="bulletins.php" id="navButton">Bulletins</a></li>
+            <li><a href="artistDisplay.php" id="navButton">Artists</a></li>
+            <li><a href="eventDisplay.php" id="navButton">Events</a></li>
+            <li><a href="noticeDisplay.php" id="navButton">Bulletins</a></li>
             <li><a href="contact.html" id="navButton">Contact Us</a></li>
             <?php
             if (isset($_SESSION['username'])) { ?>
@@ -47,19 +43,23 @@ error_reporting(E_ALL);
 
     <div class="wrapper">
         <?php
-        /*	<DEBUG>
-        Display the session data
-        */ ?>
-        <p>Here is the session data:</p>
-    <pre>
-    <?php print_r($_SESSION); ?>
-    </pre>
-        <?php
-        /* </DEBUG>
-        */
+        $id = $_GET['i'];
+        $sql = "SELECT * FROM artists WHERE artist_id='$id'";
+
+        echo "<table>";
+        foreach ($dbh->query($sql) as $row) {
+            echo "<tr><td>Name: </td><td>$row[artist_name]</td></tr>
+	    <tr><td>Phone: </td><td>$row[artist_phone]</td></tr>
+	    <tr><td>Content: </td><td>$row[artist_content]</td></tr>
+	    <tr><td>Contact: </td><td>$row[artist_contact]</td></tr>
+	    <tr><td>Image: </td><td><img src='res/img/$row[artist_image].png'></td></tr>
+	    <tr><td>Web: </td><td>$row[artist_website]</td></tr>
+	    <tr><td>Email: </td><td>$row[artist_email]</td></tr>";
+        }
+        echo "</table>";
         ?>
 
-        <a href="userCP.php">Return</a>
+        <a href="artistDisplay.php">Return to artists</a>
     </div>
 
 

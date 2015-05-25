@@ -1,10 +1,6 @@
 <?php session_start();
 //	This file simply unsets the session variables we're using to authenticate & destroys the session
-	unset($_SESSION['username']);
-	unset($_SESSION['msg']);
-    unset($_SESSION['level']);
-    unset($_SESSION['user_debug']);
-    unset($_SESSION['userID']);
+	session_unset();
 	session_destroy();
 ?>
 <!doctype html>
@@ -21,6 +17,6 @@
 <a href="login.php">Login</a>
 
 <?php
-header("Location: index.html")
+header("Location: index.php")
 ?>
 </body></html>

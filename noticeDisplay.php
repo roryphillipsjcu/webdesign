@@ -1,10 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rory
- * Date: 12-May-15
- * Time: 17:25
- */
+
+include('dbConnect.php');
+
+//Start the session
+session_start();
+
+//Report all error messages
+error_reporting(E_CORE_ERROR);
+
+?>
+<?php
+
+include('dbConnect.php');
 
 //Start the session
 session_start();
@@ -18,7 +25,7 @@ error_reporting(E_ALL);
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>TMC - Debug</title>
+    <title>TMC - Bulletin Board</title>
     <link type="text/css" href="mainStyle.css" rel="stylesheet">
 </head>
 <body>
@@ -32,9 +39,9 @@ error_reporting(E_ALL);
     <div id="navBar">
         <ul>
             <li><a href="index.php" id="navButton">Home</a></li>
-            <li><a href="artists.php" id="navButton">Artists</a></li>
-            <li><a href="events.php" id="navButton">Events</a></li>
-            <li><a href="bulletins.php" id="navButton">Bulletins</a></li>
+            <li><a href="artistDisplay.php" id="navButton">Artists</a></li>
+            <li><a href="eventDisplay.php" id="navButton">Events</a></li>
+            <li><a href="noticeDisplay.php" id="navButton">Bulletins</a></li>
             <li><a href="contact.html" id="navButton">Contact Us</a></li>
             <?php
             if (isset($_SESSION['username'])) { ?>
@@ -46,20 +53,23 @@ error_reporting(E_ALL);
     </div>
 
     <div class="wrapper">
-        <?php
-        /*	<DEBUG>
-        Display the session data
-        */ ?>
-        <p>Here is the session data:</p>
-    <pre>
-    <?php print_r($_SESSION); ?>
-    </pre>
-        <?php
-        /* </DEBUG>
-        */
-        ?>
+        <h1>Bulletin Board</h1>
 
-        <a href="userCP.php">Return</a>
+        <?php
+        $sql = "SELECT * FROM notice ORDER BY notice_expiry ASC";
+
+        foreach ($dbh->query($sql) as $row) {
+            ?>
+                <?php
+                $index = $row['notice_id'];
+                echo "  <h3><a href='noticeDetail.php?i=$index'>$row[notice_name]</a></h3>
+                    <p>$row[notice_detail]</p>";
+
+                ?>
+        <?php
+        }
+        ?>
+</body>
     </div>
 
 

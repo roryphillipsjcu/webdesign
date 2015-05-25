@@ -1,17 +1,12 @@
 <?php
 require("authenticate.php");
-
-//Check if the logged in user is an admin
-if ($_SESSION['level'] != '10'){
-    header("Location: userCP.php");
-}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>TMC - Add User</title>
+    <title>TMC - Add Notice</title>
     <link type="text/css" href="mainStyle.css" rel="stylesheet">
 </head>
 <body>
@@ -46,28 +41,25 @@ if ($_SESSION['level'] != '10'){
         }
 
         ?>
-        <form id="newForm" method="post" action="userProcess.php">
+        <form id="newForm" method="post" action="noticeProcess.php">
             <fieldset>
                 <table>
                     <tr>
-                        <td>Username: </td>
+                        <td>Name: </td>
                         <td>
-                            <input type="text" id="username" name="username">
+                            <input type="text" id="name" name="name">
                         </td>
                     </tr>
                     <tr>
-                        <td>Password: </td>
+                        <td>Detail: </td>
                         <td>
-                            <input type="password" id="password" name="password">
+                            <input type="text" id="detail" name="detail">
                         </td>
                     </tr>
                     <tr>
-                        <td>Account Level: </td>
+                        <td>Expiry: </td>
                         <td>
-                            <select id="level" name="level">
-                                <option value = '1'>Free user</option>
-                                <option value = '2'>Paid user</option>
-                            </select>
+                            <input type="date" id="expiry" name="expiry">
                         </td>
                     </tr>
                     <tr>

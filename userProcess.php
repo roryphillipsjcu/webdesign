@@ -41,7 +41,7 @@ if ($_REQUEST['submit'] == "Add") {
             //If the SQL executes
             if ($dbh->exec($sql)) {
                 $_SESSION['log'] = "Successfully added $_REQUEST[username] to the database";
-                header("Location: userHome.php");
+                header("Location: userCP.php");
             }
             //If the SQL fails
             else {

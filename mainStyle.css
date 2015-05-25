@@ -1,0 +1,111 @@
+a:link {
+    text-decoration: none;
+    color: #ff514d;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #ff514d;
+}
+
+a:hover {
+    color: #ff0000;
+    text-decoration: none;
+}
+
+a:active {
+    color: #ff514d;
+    text-decoration: none;
+}
+
+.header {
+    height: 125px;
+    background-color: #5e9ca0;
+}
+
+body {
+    background-color: #99dbe1;
+}
+
+.container {
+    width: 1024px;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+    background-color: inherit;
+}
+
+.container #navBar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #2b292b;
+}
+
+#navBar {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+#navBar ul {
+    display: inline;
+}
+
+#navBar ul li {
+    display: inline;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#navButton {
+    color: #ffffff;
+	width: 130px;
+    font-size: 20px;
+    background: #2b292b;
+    padding: 20px 40px 20px 40px;
+    text-decoration: none;
+}
+
+#navButton:hover {
+    background: #535053;
+    text-decoration: none;
+    padding: 20px 40px 30px 40px;
+}
+
+#navButton:active {
+	background: grey;
+}
+
+#wrapper {
+    background-color: inherit;
+}
+
+/* The login / signup page is the one one to have a 50/50 column width
+all other pages have an 80/20 with an anouncement board on the right side */
+#signup {
+    width: 50%;
+    float: left;
+    background-color: inherit;
+}
+
+#login {
+    width: 50%;
+    float: left;
+    background-color: inherit;
+}
+
+#leftBar {
+    width: 75%;
+    height: auto;
+    float: left;
+    position: inherit;
+    background-color: inherit;
+}
+
+#rightBar {
+    width: 25%;
+    height: auto;
+    float: left;
+    position: inherit;
+    background-color: inherit;
+}
